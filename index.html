@@ -13,12 +13,13 @@
 <style>
 :root{
   --beige-bg: #f9f4ed;
-  --gold: #c59b27;
-  --gold-light: #f7eec9;
-  --gold-dark: #8c6a12;
+  --gold: #c99a55;
+  --gold-light: #e7c98f;
+  --gold-dark: #9d6c25;
   --text-main: #3b2e25;
   --text-muted: #786354;
 }
+
 
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -35,9 +36,11 @@ button{font:inherit}
 /* ---------- OPENING SCREEN ---------- */
 .intro{
   position:fixed;inset:0;z-index:1000;
+  top: 0;
+  left: 0;
   display:grid;place-items:center;
   overflow:hidden;
-  cursor: default;
+  cursor: pointer;
   color:var(--text-main);
   background:
     linear-gradient(135deg, rgba(249,244,237,0.92), rgba(240,230,218,0.95)),
@@ -60,6 +63,7 @@ button{font:inherit}
 .ic-tr { top: 0; right: 0; transform: scaleX(-1); }
 .ic-bl { bottom: 0; left: 0; transform: scaleY(-1); }
 .ic-br { bottom: 0; right: 0; transform: scale(-1); }
+
 
 .intro-content{
   position:relative;z-index:3;
@@ -89,7 +93,7 @@ button{font:inherit}
 }
 .intro-title{
   margin:8px 0 8px;
-  font:clamp(38px, 7vw, 75px)/1.1 "Cinzel", serif;
+  font:clamp(38px, 7vw, 75px)/1.1 "Great Vibes","Cinzel","cursive", serif;
   color:var(--text-main);
   letter-spacing: 0.04em;
 }
@@ -120,21 +124,26 @@ button{font:inherit}
 }
 
 /* ---------- OPENING BOOK ANIMATION ---------- */
-.book{
-  position:fixed;inset:0;z-index:900;
-  display:none;perspective:1800px;pointer-events:none;
+.book {
+  position: fixed; inset: 0; z-index: 900;
+  display: none; pointer-events: none;
+  overflow: hidden; /* Ensures curtains don't overflow the screen during slide */
 }
-.book.active{display:block}
-.page{
-  position:absolute;top:0;width:50%;height:100%;
-  background:linear-gradient(135deg,#f5ebd8,#e8dabf);
-  box-shadow:0 0 50px rgba(0,0,0,.2);
-  transition:transform 1.25s cubic-bezier(.76,0,.2,1);
+.book.active { display: block; }
+
+.page {
+  position: absolute; top: 0; width: 50%; height: 100%;
+  background: linear-gradient(135deg, #f5ebd8, #e8dabf);
+  box-shadow: 0 0 50px rgba(0,0,0,.2);
+  transition: transform 1s cubic-bezier(.76, 0, .2, 1);
 }
-.page.left{left:0;transform-origin:left center}
-.page.right{right:0;transform-origin:right center}
-.book.open .page.left{transform:rotateY(-108deg)}
-.book.open .page.right{transform:rotateY(108deg)}
+
+.page.left { left: 0; }
+.page.right { right: 0; }
+
+/* Curtain opening effect: sliding outward */
+.book.open .page.left { transform: translateX(-100%); }
+.book.open .page.right { transform: translateX(100%); }
 
 .click-me{
   /* margin-top:8px; */
@@ -173,7 +182,7 @@ button{font:inherit}
 }
 .reveal{
   opacity:0;transform:translateY(25px) scale(.98);
-  transition:1.2s cubic-bezier(0.16, 1, 0.3, 1) .6s;
+  transition:2s cubic-bezier(0.16, 1, 0.3, 1) .2s;
 }
 .reveal.show{opacity:1;transform:none}
 
@@ -217,12 +226,14 @@ button{font:inherit}
 
 .parent-block{margin-top:20px}
 .parent-label{
-  font-size:10px;text-transform:uppercase;
+  font-size:10px;
+  text-transform:uppercase;
   letter-spacing:.2em;color:var(--gold-dark);
   font-weight: 600;
 }
 .parents{
   margin-top:5px;
+  text-transform:uppercase;
   font:600 clamp(15px, 2.2vw, 20px) "Cormorant Garamond",serif;
   letter-spacing:.06em;
   color:var(--text-main);
@@ -257,7 +268,7 @@ button{font:inherit}
 
 .of{
   text-transform:uppercase;letter-spacing:.25em;
-  font-size:9px;color:var(--text-muted);
+  font-size:9px;color:var(--text-main);
 }
 .groom{
   margin-top:4px;
@@ -274,21 +285,23 @@ button{font:inherit}
 .and{
   font:30px "Cormorant Garamond",serif;
   color:var(--gold);
-  margin:2px 0;
+  /* margin:0 0; */
 }
 .bride{
-  font:700 clamp(22px, 3.8vw, 38px) "Cinzel", serif;
+  font:700 clamp(22px, 3.8vw, 38px) "Cormorant Garamond", serif;
   letter-spacing:.06em;
   color:var(--text-main);
 }
 .bride-family{
   margin-top:4px;
-  font-size:10px;
+  font:600 clamp(15px, 2.2vw, 20px) "Cormorant Garamond",serif;
+  font-size:18px;
   letter-spacing:.15em;
+  font-family: "Cormorant Garamond",serif;
   text-transform:uppercase;
   line-height:1.6;
   color:var(--text-main);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 /* ---------- DETAILS CARDS & VENUE ---------- */
@@ -520,7 +533,7 @@ button{font:inherit}
 
       <div class="of">Of their son</div>
       <div class="groom">Mohammed Saad</div>
-      <div class="degree">(M.Sc, UK)</div>
+      <div class="degree">(MSc, UK)</div>
 
       <div class="and">&amp;</div>
 
@@ -531,8 +544,8 @@ button{font:inherit}
         <div class="detail-card">
           <div class="detail-icon">📅</div>
           <div class="label">Date</div>
-          <div class="value">12 September 2026</div>
-          <div class="subvalue">Saturday</div>
+          <div class="value">12 October 2026</div>
+          <div class="subvalue">Monday</div>
         </div>
 
         <div class="detail-card">
